@@ -16,6 +16,9 @@ public class OrderController {
     	//Create a new order the amount received
     	Order newOrder = new Order(Integer.parseInt(amount),orderRefrence.toString());
     	//store the new order in the orders list
+    	Orders orders = Orders.getInstance();
+    	orders.addOrders(newOrder);
+    	System.out.println("Order added:" + amount);
     	//return order reference
         return orderRefrence.toString();
     }
