@@ -43,4 +43,16 @@ public class Orders {
 		}
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		for(Order order : orderList) {
+				builder.append(order.toString());
+				builder.append(",");
+		}
+		builder.append("{}]");
+		return builder.toString();
+	}
 }

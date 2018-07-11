@@ -16,4 +16,8 @@ public class Order {
 	public String getOrderRefrence() {
 		return orderRefrence;
 	}
+	@Override
+	public String toString() {
+		return String.format("{\"orderAmount\":\"%s\",\"orderRefrence\":\"%s\"}", orderAmount,orderRefrence);
+	}
 }
