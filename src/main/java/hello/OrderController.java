@@ -42,4 +42,10 @@ public class OrderController {
     		return null;
     	}
     }
+    
+    @RequestMapping("/orders/get")
+    public String getOrders() {
+    	Orders orders = Orders.getInstance();
+    	return orders.toString();
+    }
 }

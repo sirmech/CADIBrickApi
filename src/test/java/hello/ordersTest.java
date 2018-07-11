@@ -72,4 +72,19 @@ public class ordersTest {
 		String getOrderResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/order/get?reference=abc-invalid", String.class);
 		assertNull(getOrderResponse);
 	}
+	
+	@Test
+	public void getOrdersValidTest() {
+		String referenceOne = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=15", String.class);
+		String referenceTwo = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=12", String.class);
+		String getOrdersResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/orders/get", String.class);
+		Pattern p = Pattern.compile(referenceOne);
+		Matcher m = p.matcher(getOrdersResponse);
+		assertTrue(m.find());
+		
+		 p = Pattern.compile(referenceTwo);
+		 m = p.matcher(getOrdersResponse);
+		 assertTrue(m.find());
+	}
+	
 }
