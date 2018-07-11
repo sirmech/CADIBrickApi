@@ -23,4 +23,18 @@ public class OrderController {
         return orderRefrence.toString();
     }
 	
+    @RequestMapping("/order/get")
+    public Order getOrder(@RequestParam(value="reference", defaultValue="0") String reference) {
+    	//get instance of orders
+    	Orders orders = Orders.getInstance();
+    	//search orders for the requested order
+    	Order requestedOrder = orders.getOrder(reference);
+    	//if the order exists send it
+    	if(requestedOrder != null) {
+    		return requestedOrder;
+    	}
+    	else { //else return nothing
+    		return null;
+    	}
+    }
 }

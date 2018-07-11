@@ -28,4 +28,19 @@ public class Orders {
 			orderList.add(order);
 		}
 	}
+	
+	
+	/**
+	 * Get an order by order reference
+	 * @param reference
+	 * @return the order requested
+	 */
+	public Order getOrder(String reference) {
+		for(Order order : orderList) {
+			if(order.getOrderRefrence().equals(reference)) {
+				return order;
+			}
+		}
+		return null;
+	}
 }
