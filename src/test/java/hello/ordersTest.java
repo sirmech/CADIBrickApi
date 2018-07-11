@@ -1,6 +1,7 @@
 package hello;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -94,4 +95,28 @@ public class ordersTest {
 		 assertTrue(m.find());
 	}
 	
+	@Test
+	public void updateOrderValidTest() {
+		//create an order to be updated
+		String createOrderResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=5", String.class);
+		//update the value
+		String updatedRefrence = restTemplate.getForObject("http://localhost:" + orderPort + "/order/update?reference=" 
+																	+ createOrderResponse + "&amount=" + 50, String.class);
+		String requestedOrder = restTemplate.getForObject("http://localhost:" + orderPort + "/order/get?reference=" + updatedRefrence, String.class);
+		//check the amount has updated
+		Pattern p = Pattern.compile("\"orderAmount\":50");
+		Matcher m = p.matcher(requestedOrder);
+		assertTrue(m.find());
+		
+		p = Pattern.compile(createOrderResponse);
+		m = p.matcher(requestedOrder);
+		assertFalse(m.find());
+	}
+	
+	@Test
+	public void updateOrderInvalidRefrence() {
+		//Try to update an invalid order
+		String updatedRefrence = restTemplate.getForObject("http://localhost:" + orderPort + "/order/update?reference=abcInvalid&amount=" + 50, String.class);
+		assertNull(updatedRefrence);
+	}
 }

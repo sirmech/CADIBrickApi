@@ -38,6 +38,13 @@ public class Orders {
 		}
 	}
 	
+	/**
+	 * Remove an order from orders
+	 * @param order The order to be removed
+	 */
+	public void removeOrder(Order order) {
+		orderList.remove(order);
+	}
 	
 	/**
 	 * Get an order by order reference
