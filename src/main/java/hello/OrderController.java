@@ -14,13 +14,18 @@ public class OrderController {
     	//Generate unique order reference
     	UUID orderRefrence = UUID.randomUUID(); 
     	//Create a new order the amount received
-    	Order newOrder = new Order(Integer.parseInt(amount),orderRefrence.toString());
-    	//store the new order in the orders list
-    	Orders orders = Orders.getInstance();
-    	orders.addOrders(newOrder);
-    	System.out.println("Order added:" + amount);
-    	//return order reference
-        return orderRefrence.toString();
+    	try {
+    		Order newOrder = new Order(Integer.parseInt(amount),orderRefrence.toString());
+    		//store the new order in the orders list
+    		Orders orders = Orders.getInstance();
+    		orders.addOrders(newOrder);
+    		System.out.println("Order added:" + amount);
+    		//return order reference
+    		return orderRefrence.toString();
+    	} //If amount given is not a valid number
+    	catch (NumberFormatException e) {
+    		return "";
+    	}
     }
 	
     @RequestMapping("/order/get")
