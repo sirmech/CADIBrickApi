@@ -23,7 +23,7 @@ import hello.OrderController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ordersTest {
+public class OrderControllerTest {
 
 	//controller to be tested
 	@Autowired
