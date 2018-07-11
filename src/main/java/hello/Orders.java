@@ -8,6 +8,11 @@ public class Orders {
 	private List<Order> orderList;
 	private static Orders instance;
 	
+	/**
+	 * Get instance of orders.
+	 * If orders doesn't exist a new instance will be created and returned
+	 * @return The orders
+	 */
 	public static Orders getInstance() {
 		if(instance == null) {
 			instance = new Orders();
@@ -23,6 +28,10 @@ public class Orders {
 		orderList = new ArrayList<Order>();
 	}
 	
+	/**
+	 * Add an order to orders
+	 * @param order The order to be added
+	 */
 	public void addOrders(Order order) {
 		if(orderList != null) {
 			orderList.add(order);
@@ -44,6 +53,7 @@ public class Orders {
 		return null;
 	}
 	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

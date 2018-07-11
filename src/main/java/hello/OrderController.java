@@ -45,7 +45,9 @@ public class OrderController {
     
     @RequestMapping("/orders/get")
     public String getOrders() {
+    	//get instance of orders
     	Orders orders = Orders.getInstance();
+    	//return orders in JSON form
     	return orders.toString();
     }
 }

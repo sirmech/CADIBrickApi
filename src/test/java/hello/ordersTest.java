@@ -62,22 +62,29 @@ public class ordersTest {
 		String createOrderResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=4", String.class);
 		String getOrderResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/order/get?reference="+createOrderResponse, String.class);
 		System.out.println(getOrderResponse);
+		//check the order was stored
 		Pattern p = Pattern.compile("\"orderAmount\":4");
 		Matcher m = p.matcher(getOrderResponse);
 		assertTrue(m.find());
 	}
 	
+	
+	//test that nothing is returned if an invalid reference is received
 	@Test
 	public void getOrderInvalidRefrence() {
 		String getOrderResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/order/get?reference=abc-invalid", String.class);
 		assertNull(getOrderResponse);
 	}
 	
+	//Test get orders end point
 	@Test
 	public void getOrdersValidTest() {
+		//Enter two orders
 		String referenceOne = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=15", String.class);
 		String referenceTwo = restTemplate.getForObject("http://localhost:" + orderPort + "/order/create?amount=12", String.class);
+		//get all the orders
 		String getOrdersResponse = restTemplate.getForObject("http://localhost:" + orderPort + "/orders/get", String.class);
+		//test if the orders got returned
 		Pattern p = Pattern.compile(referenceOne);
 		Matcher m = p.matcher(getOrdersResponse);
 		assertTrue(m.find());
